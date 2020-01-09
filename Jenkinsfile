@@ -1,20 +1,8 @@
 pipeline {
-    agent {
-        node {
-            label "jenkins-ssl-slave"
-        }
-    }
+    agent any
     triggers { pollSCM('* * * * *') }
     environment {
         index = "index.html"
-        tmp_directory = "/tmp/${BUILD_TIMESTAMP}"
-        index_directory = "${tmp_directory}/index"
-        notebooks_directory = "${tmp_directory}/notebooks"
-        zeppelin_version = "0.8.2"
-        gcr_registry_path = "us.gcr.io/cloud-sandbox-1162/cambridgesemantics"
-        ecr_registry_path = "105249152789.dkr.ecr.us-east-1.amazonaws.com/cambridgesemantics.com/cambridgesemantics"
-        //index_directory = "/tmp/${BUILD_TIMESTAMP}/index"
-        //notebooks_directory = "/tmp/${BUILD_TIMESTAMP}/notebooks"
     } // end of environment
     stages {
         stage('GENERATE-REPORTING-BASE-STRUCTURE') {
@@ -121,10 +109,3 @@ def stage_status_msg(stage_name, result) {
     }
 }
 
-def copy_notebooks(src_directory,dst_directory) {
-    script {
-        dir ("${src_directory}") {
-            sh "find -iname '*.json' -exec cp {} ${dst_directory}"
-        }
-    }
-}

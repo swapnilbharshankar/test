@@ -7,14 +7,9 @@ pipeline {
     stages {
         stage('GENERATE-REPORTING-BASE-STRUCTURE') {
             steps {
-                //create index.html
-                createIndexTemp(
-                    "${index}",
-                    "${JOB_NAME}",
-                    "${BUILD_NUMBER}",
-                    "${BUILD_URL}",
-                    "${JOB_URL}"
-                )
+		script {
+			echo "a"
+		}
             }
         } // end of GENERATE-REPORTING-BASE-STRUCTURE
         stage('ENV PREPARATION') {

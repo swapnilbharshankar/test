@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    triggers { pollSCM('H */4 * * 1-5') }
+    triggers { 
+		pollSCM('H */4 * * 1-5') 
+	}
     environment {
         index = "index.html"
     } // end of environment
